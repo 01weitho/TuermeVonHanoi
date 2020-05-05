@@ -1,0 +1,13 @@
+E:\Oubrschual\4. Klasse\Aut\Programme\TuermeVonHanoi\06_TuermeVonHanoi(Rekursion)\06_TuermeVonHanoi(Rekursion)\bin\Debug\netcoreapp3.1\06_TuermeVonHanoi(Rekursion).exe
+E:\Oubrschual\4. Klasse\Aut\Programme\TuermeVonHanoi\06_TuermeVonHanoi(Rekursion)\06_TuermeVonHanoi(Rekursion)\bin\Debug\netcoreapp3.1\06_TuermeVonHanoi(Rekursion).deps.json
+E:\Oubrschual\4. Klasse\Aut\Programme\TuermeVonHanoi\06_TuermeVonHanoi(Rekursion)\06_TuermeVonHanoi(Rekursion)\bin\Debug\netcoreapp3.1\06_TuermeVonHanoi(Rekursion).runtimeconfig.json
+E:\Oubrschual\4. Klasse\Aut\Programme\TuermeVonHanoi\06_TuermeVonHanoi(Rekursion)\06_TuermeVonHanoi(Rekursion)\bin\Debug\netcoreapp3.1\06_TuermeVonHanoi(Rekursion).runtimeconfig.dev.json
+E:\Oubrschual\4. Klasse\Aut\Programme\TuermeVonHanoi\06_TuermeVonHanoi(Rekursion)\06_TuermeVonHanoi(Rekursion)\bin\Debug\netcoreapp3.1\06_TuermeVonHanoi(Rekursion).dll
+E:\Oubrschual\4. Klasse\Aut\Programme\TuermeVonHanoi\06_TuermeVonHanoi(Rekursion)\06_TuermeVonHanoi(Rekursion)\bin\Debug\netcoreapp3.1\06_TuermeVonHanoi(Rekursion).pdb
+E:\Oubrschual\4. Klasse\Aut\Programme\TuermeVonHanoi\06_TuermeVonHanoi(Rekursion)\06_TuermeVonHanoi(Rekursion)\obj\Debug\netcoreapp3.1\06_TuermeVonHanoi(Rekursion).csprojAssemblyReference.cache
+E:\Oubrschual\4. Klasse\Aut\Programme\TuermeVonHanoi\06_TuermeVonHanoi(Rekursion)\06_TuermeVonHanoi(Rekursion)\obj\Debug\netcoreapp3.1\06_TuermeVonHanoi(Rekursion).csproj.CoreCompileInputs.cache
+E:\Oubrschual\4. Klasse\Aut\Programme\TuermeVonHanoi\06_TuermeVonHanoi(Rekursion)\06_TuermeVonHanoi(Rekursion)\obj\Debug\netcoreapp3.1\06_TuermeVonHanoi(Rekursion).AssemblyInfoInputs.cache
+E:\Oubrschual\4. Klasse\Aut\Programme\TuermeVonHanoi\06_TuermeVonHanoi(Rekursion)\06_TuermeVonHanoi(Rekursion)\obj\Debug\netcoreapp3.1\06_TuermeVonHanoi(Rekursion).AssemblyInfo.cs
+E:\Oubrschual\4. Klasse\Aut\Programme\TuermeVonHanoi\06_TuermeVonHanoi(Rekursion)\06_TuermeVonHanoi(Rekursion)\obj\Debug\netcoreapp3.1\06_TuermeVonHanoi(Rekursion).dll
+E:\Oubrschual\4. Klasse\Aut\Programme\TuermeVonHanoi\06_TuermeVonHanoi(Rekursion)\06_TuermeVonHanoi(Rekursion)\obj\Debug\netcoreapp3.1\06_TuermeVonHanoi(Rekursion).pdb
+E:\Oubrschual\4. Klasse\Aut\Programme\TuermeVonHanoi\06_TuermeVonHanoi(Rekursion)\06_TuermeVonHanoi(Rekursion)\obj\Debug\netcoreapp3.1\06_TuermeVonHanoi(Rekursion).genruntimeconfig.cache
