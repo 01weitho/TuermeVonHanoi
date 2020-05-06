@@ -16,6 +16,7 @@ namespace _06_TuermeVonHanoi_Rekursion_
         static uint AnzahlScheiben;
         static void Main(string[] args)
         {
+            #region Eingabe
             Console.WriteLine("Wieviele Scheiben möchten Sie verschieben?");
             while (!(uint.TryParse(Console.ReadLine(), out AnzahlScheiben)))
             {
@@ -113,12 +114,13 @@ namespace _06_TuermeVonHanoi_Rekursion_
                 }
             }
             Console.WriteLine("Damit werden {0} Scheiben von Turm {1} nach Turm {2} ueber Turm {3} geschoben...", AnzahlScheiben, Startturm, Zielturm, ueber);
+            #endregion
 
             System.Threading.Thread.Sleep(100);
 
-            //Anzeigen der Tuerme
-
-
+            #region Verschieben
+            verschiebe(Startturm, Zielturm, ueber, AnzahlScheiben);
+            #endregion
 
             Console.ReadKey();
         }
