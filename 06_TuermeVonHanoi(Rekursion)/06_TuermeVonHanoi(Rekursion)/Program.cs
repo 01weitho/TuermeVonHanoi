@@ -77,9 +77,6 @@ namespace _06_TuermeVonHanoi_Rekursion_
                     switch (Zielturm)
                     {
                         case "A":
-
-
-
                             ueber = "B";
                             break;
 
