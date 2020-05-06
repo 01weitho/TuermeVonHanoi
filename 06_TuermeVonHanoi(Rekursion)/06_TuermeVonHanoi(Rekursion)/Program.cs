@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Principal;
 using System.Threading.Tasks;
 //Thomas Weithaler
 //4 BEL
@@ -10,10 +11,12 @@ namespace _06_TuermeVonHanoi_Rekursion_
     class Program
     {
         static int[,] Feld;
+        static uint _start;
+        static uint _ziel;
+        static uint AnzahlScheiben;
         static void Main(string[] args)
         {
             Console.WriteLine("Wieviele Scheiben möchten Sie verschieben?");
-            uint AnzahlScheiben = 0;
             while (!(uint.TryParse(Console.ReadLine(), out AnzahlScheiben)))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -48,10 +51,12 @@ namespace _06_TuermeVonHanoi_Rekursion_
                     switch (Zielturm)
                     {
                         case "B":
+                            _ziel = 2;
                             ueber = "C";
                             break;
 
                         case "C":
+                            _ziel = 3;
                             ueber = "B";
                             break;
                     }
@@ -61,10 +66,12 @@ namespace _06_TuermeVonHanoi_Rekursion_
                     switch (Zielturm)
                     {
                         case "A":
+                            _ziel = 1;
                             ueber = "C";
                             break;
 
                         case "C":
+                            _ziel = 3;
                             ueber = "A";
                             break;
                     }
@@ -74,10 +81,12 @@ namespace _06_TuermeVonHanoi_Rekursion_
                     switch (Zielturm)
                     {
                         case "A":
+                            _ziel = 1;
                             ueber = "B";
                             break;
 
                         case "B":
+                            _ziel = 2;
                             ueber = "A";
                             break;
                     }
@@ -85,6 +94,24 @@ namespace _06_TuermeVonHanoi_Rekursion_
 
             }
             Feld = new int[2, AnzahlScheiben];
+            for(int i=0;i<AnzahlScheiben;i++)
+            {
+                if(Startturm=="A")
+                {
+                    _start = 0;
+                    Feld[0, i] = 1;
+                }
+                if (Startturm == "B")
+                {
+                    _start = 1;
+                    Feld[1, i] = 1;
+                }
+                if (Startturm == "C")
+                {
+                    _start = 2;
+                    Feld[2, i] = 1;
+                }
+            }
             Console.WriteLine("Damit werden {0} Scheiben von Turm {1} nach Turm {2} ueber Turm {3} geschoben...", AnzahlScheiben, Startturm, Zielturm, ueber);
 
             System.Threading.Thread.Sleep(100);
@@ -112,19 +139,45 @@ namespace _06_TuermeVonHanoi_Rekursion_
         {
             if (Anzahl == 1)
             {
-                //Schiebe eine Scheibe von Start nach Ziel.
+                schiebeEinTurm();
             }
             else
             {
                 verschiebe(Start, Ueber, Ziel, Anzahl - 1);
-                //Schiebe eine Scheibe von Start nach Ziel
+                schiebeEinTurm();
                 verschiebe(Ueber, Ziel, Start, Anzahl - 1);
             }
         }
 
+        /// <summary>
+        /// Schiebt die oberste Scheibe vom Startturm zum ersten freien Platz am Zielturm
+        /// </summary>
         static void schiebeEinTurm()
         {
-               
+            bool quelleGefunden = false;
+            uint posx = 0, posy = 0;
+            for (uint i = AnzahlScheiben; quelleGefunden == true; i--)
+            {
+                if (Feld[_start, i] == 1)
+                {
+                    quelleGefunden = true;
+                    posx = _start;
+                    posy = i;
+                }
+            }
+            //von Start nach Ziel schieben
+            Feld[posx, posy] = 0;
+            bool zielGefunden = false;
+
+            for (uint i = 0; zielGefunden == true; i++)
+            {
+                if (Feld[_ziel, i] == 0)
+                {
+                    zielGefunden = true;
+                    posx = _ziel;
+                    posy = i;
+                }
+            }
         }
     }
 }
