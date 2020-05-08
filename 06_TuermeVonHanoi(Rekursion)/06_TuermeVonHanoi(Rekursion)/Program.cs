@@ -10,15 +10,18 @@ namespace _06_TuermeVonHanoi_Rekursion_
 {
     class Program
     {
-        static int[,] Feld;
-        static uint _start;
-        static uint _ziel;
-        static uint AnzahlScheiben;
+        static int _xKonsole = 75;        //hier kann man die groese in y-Richtung des Konsolenfensters veraendern
+        static int _yKonsole=20;         //hier kann man die groese in x-Richtung des Konsolenfensters bei der Simulatuon aendern
+        static int[,] Feld;             //Array um die Position der Scheiben festzuhalten
+        static int _start;            //speichert den Startturm als Zahl ab um besser arbeiten zu koennen
+        static int _ziel;            //speichert den Zielturm als Zahl ab um besser arbeiten zu koennen
+        static int AnzahlScheiben;  //hier wird beim einlesen die gewuenschte Anzahl der Scheiben gespeichert
+        static int posTurmA, posTurmB, posTurmC;
         static void Main(string[] args)
         {
             #region Eingabe
             Console.WriteLine("Wieviele Scheiben möchten Sie verschieben?");
-            while (!(uint.TryParse(Console.ReadLine(), out AnzahlScheiben)))
+            while (!(int.TryParse(Console.ReadLine(), out AnzahlScheiben)))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Eingabe ungueltig, nur natuerliche Zahlen zulaessig.");
@@ -52,12 +55,12 @@ namespace _06_TuermeVonHanoi_Rekursion_
                     switch (Zielturm)
                     {
                         case "B":
-                            _ziel = 2;
+                            _ziel = 1;
                             ueber = "C";
                             break;
 
                         case "C":
-                            _ziel = 3;
+                            _ziel = 2;
                             ueber = "B";
                             break;
                     }
@@ -67,12 +70,12 @@ namespace _06_TuermeVonHanoi_Rekursion_
                     switch (Zielturm)
                     {
                         case "A":
-                            _ziel = 1;
+                            _ziel = 0;
                             ueber = "C";
                             break;
 
                         case "C":
-                            _ziel = 3;
+                            _ziel = 2;
                             ueber = "A";
                             break;
                     }
@@ -82,43 +85,49 @@ namespace _06_TuermeVonHanoi_Rekursion_
                     switch (Zielturm)
                     {
                         case "A":
-                            _ziel = 1;
+                            _ziel = 0;
                             ueber = "B";
                             break;
 
                         case "B":
-                            _ziel = 2;
+                            _ziel = 1;
                             ueber = "A";
                             break;
                     }
                     break;
 
             }
-            Feld = new int[2, AnzahlScheiben];
+            Feld = new int[3, AnzahlScheiben];
             for(int i=0;i<AnzahlScheiben;i++)
             {
                 if(Startturm=="A")
                 {
                     _start = 0;
-                    Feld[0, i] = 1;
+                    Feld[0, i] = (int)AnzahlScheiben-i;
                 }
                 if (Startturm == "B")
                 {
                     _start = 1;
-                    Feld[1, i] = 1;
+                    Feld[1, i] = (int)AnzahlScheiben-i;
                 }
                 if (Startturm == "C")
                 {
                     _start = 2;
-                    Feld[2, i] = 1;
+                    Feld[2, i] = (int)AnzahlScheiben-i;
                 }
             }
             Console.WriteLine("Damit werden {0} Scheiben von Turm {1} nach Turm {2} ueber Turm {3} geschoben...", AnzahlScheiben, Startturm, Zielturm, ueber);
             #endregion
 
-            System.Threading.Thread.Sleep(100);
+            System.Threading.Thread.Sleep(1000);
+
+            Console.Clear();
 
             #region Verschieben
+            //Zeicne als erstes alle Scheiben(Startsituation)
+            zeichne();
+            System.Threading.Thread.Sleep(50);
+
             verschiebe(Startturm, Zielturm, ueber, AnzahlScheiben);
             #endregion
 
@@ -137,47 +146,188 @@ namespace _06_TuermeVonHanoi_Rekursion_
         /// <param name="Ziel">Zielturm, wo die Scheiben zum Schluss liegen sollen</param>
         /// <param name="Ueber">Der Turm wo die Scheiben "zwischengleagert" werden</param>
         /// <param name="Anzahl">Anzahl der zu verschiebenden Scheiben</param>
-        static void verschiebe(string Start, string Ziel, string Ueber, uint Anzahl)
+        static void verschiebe(string A, string C, string B, int Anzahl)
         {
-            if (Anzahl == 1)
+            if (Anzahl > 1)
             {
-                schiebeEinTurm();
+                verschiebe(A, B, C, Anzahl - 1);
+                schiebeEinTurm(A,C);
+                verschiebe(B, C, A, Anzahl - 1);
             }
-            else
+            else 
             {
-                verschiebe(Start, Ueber, Ziel, Anzahl - 1);
-                schiebeEinTurm();
-                verschiebe(Ueber, Ziel, Start, Anzahl - 1);
+                schiebeEinTurm(A,C);
             }
         }
 
         /// <summary>
         /// Schiebt die oberste Scheibe vom Startturm zum ersten freien Platz am Zielturm
         /// </summary>
-        static void schiebeEinTurm()
+        static void schiebeEinTurm(string Start,string Ziel)
         {
-            bool quelleGefunden = false;
-            uint posx = 0, posy = 0;
-            for (uint i = AnzahlScheiben; quelleGefunden == true; i--)
+            int start = 0, ziel = 0;
+
+            switch (Start)
             {
-                if (Feld[_start, i] == 1)
+                case "A":
+                    start = 0;
+                    break;
+
+                case "B":
+                    start = 1;
+                    break;
+
+                case "C":
+                    start = 2;
+                    break;
+            }
+            switch (Ziel)
+            {
+                case "A":
+                    ziel = 0;
+                    break;
+
+                case "B":
+                    ziel = 1;
+                    break;
+
+                case "C":
+                    ziel = 2;
+                    break;
+            }
+
+            bool quelleGefunden = false;
+            int posx = 0, posy = 0, groesse = 0;
+            
+            //sucht die oberste Scheibe auf den Startturm
+            for (int i = AnzahlScheiben-1; quelleGefunden == false; i--)
+            {
+                if (Feld[start, i] !=0)
                 {
                     quelleGefunden = true;
-                    posx = _start;
+                    posx = start;
+                    posy = i;
+                    groesse = Feld[start, i];
+                }
+            }
+            Feld[posx, posy] = 0;       //loescht die Scheibe auf dieser Position
+
+            bool zielGefunden = false;
+            //den ersten freien Platz auf Zielturm
+            for (int i = 0; zielGefunden == false; i++)
+            {
+                if (Feld[ziel, i] == 0)
+                {
+                    zielGefunden = true;
+                    posx = ziel;
                     posy = i;
                 }
             }
-            //von Start nach Ziel schieben
-            Feld[posx, posy] = 0;
-            bool zielGefunden = false;
+            Feld[posx, posy] = groesse;     //speichert die Scheibe auf der neuen Position
 
-            for (uint i = 0; zielGefunden == true; i++)
+            // Zeichnet alle Scheiben neu
+            zeichne();
+
+            //Delay um die Simulation beobachten zu koennen
+            System.Threading.Thread.Sleep(500);
+        }
+
+        /// <summary>
+        /// Zeichnet die Scheuben auf die Tuerme laut dem Array Feld
+        /// </summary>
+        static void zeichne()
+        {
+            //Zuerst die alte Zeichnung loeschen
+            Console.Clear();
+            
+            //Grundgereust neu zeichen
+            grundgeruest();
+
+            //scheiben an der Richtigen stelle Zeichen (Array -> Feld)
+            zeichneScheiben();
+        }
+
+        /// <summary>
+        /// Zeichnet das Grundgeruest auf die Console -> Namen der Tuerme und einen Strich oberhalb der Namen
+        /// </summary>
+        static void grundgeruest()
+        {
+            //setzt das Konsolenfenster auf eine Bestimmte größe -> Variablen
+            Console.SetWindowSize(_xKonsole, _yKonsole);
+
+            //schreibt die Namen der Türme am unteren Rand 
+            Console.SetCursorPosition(5, (_yKonsole - 1));
+            Console.Write("Turm A");
+            posTurmA = Console.CursorLeft - 3;
+
+            Console.SetCursorPosition((_xKonsole / 2) - 3, (_yKonsole - 1));
+            Console.Write("Turm B");
+            posTurmB = Console.CursorLeft - 3;
+
+
+            Console.SetCursorPosition(_xKonsole - 10, _yKonsole - 1);
+            Console.Write("Turm C");
+            posTurmC = Console.CursorLeft - 3;
+
+            //schreibt noch eine Zeile unterschtriche oberhalb der Namen
+            Console.SetCursorPosition(0, _yKonsole - 2);
+            for (int i = 0; i <= _xKonsole; i++)
             {
-                if (Feld[_ziel, i] == 0)
+                Console.Write("_");
+            }
+
+        }
+
+        /// <summary>
+        /// Zeichnet die Scheiben mit *; eine Scheibe pro Zeile
+        /// Die Methode zeichnet immer alle Scheiben neu
+        /// </summary>
+        static void zeichneScheiben()
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                for (int i = 0; i < AnzahlScheiben; i++)
                 {
-                    zielGefunden = true;
-                    posx = _ziel;
-                    posy = i;
+                    if (Feld[j, i] != 0)
+                    {
+                        int breite = Feld[j, i];
+
+                        switch (j)
+                        {
+                            case 0:
+                                Console.SetCursorPosition(posTurmA - ((breite*2) / 2), _yKonsole - (i + 3));
+                                for (int u = 0; u < breite; u++)
+                                {
+                                    Console.BackgroundColor = ConsoleColor.Blue;
+                                    Console.Write("  ");
+                                    Console.BackgroundColor = ConsoleColor.Black;
+                                }
+                                break;
+
+                            case 1:
+                                Console.SetCursorPosition(posTurmB - ((breite*2) / 2), _yKonsole - (i + 3));
+                                for (int u = 0; u < breite; u++)
+                                {
+                                    Console.BackgroundColor = ConsoleColor.Blue;
+                                    Console.Write("  ");
+                                    Console.BackgroundColor = ConsoleColor.Black;
+                                }
+                                break;
+
+                            case 2:
+                                Console.SetCursorPosition(posTurmC - ((breite*2) / 2), _yKonsole - (i + 3));
+                                for (int u = 0; u < breite; u++)
+                                {
+                                    Console.BackgroundColor = ConsoleColor.Blue;
+                                    Console.Write("  ");
+                                    Console.BackgroundColor = ConsoleColor.Black;
+                                }
+                                break;
+
+                        }
+
+
+                    }
                 }
             }
         }
